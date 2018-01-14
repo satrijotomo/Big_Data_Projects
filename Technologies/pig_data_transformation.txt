@@ -1,0 +1,8 @@
+# Load csv data to HDFS. 
+$ hdfs dfs -mkdir -p /user/bambangsatrijoto/rawdata/handson_train/nyse
+$ hdfs dfs -mkdir -p /user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices
+$ hdfs dfs -copyFromLocal NASDAQ_dividends_A.csv  /user/bambangsatrijoto/rawdata/handson_train/nyse
+$ hdfs dfs -copyFromLocal NASDAQ_dividends_C.csv /user/bambangsatrijoto/rawdata/handson_train/nyse
+$ hdfs dfs -copyFromLocal NASDAQ_daily_prices_subset.csv /user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices
+
+
