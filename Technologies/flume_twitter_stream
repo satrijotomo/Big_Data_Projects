@@ -1,0 +1,51 @@
+## Use flume to ingest twitter stream into hdfs
+
+1. Create new Twitter App and generate the API keys - https://apps.twitter.com/
+2. Download flume-sources JAR - http://files.cloudera.com/samples/flume-sources-1.0-SNAPSHOT.jar
+3. Place the JAR file in the client FS, in this example it is stored at directory: 
+    /home/cloudera/hadoop-training-projects/flume/twitter-stream/
+4. Create property file with the file content below. 
+
+
+######twitterstream########
+
+twit.channels = ch-1
+twit.sources = src-1
+twit.sinks = snk-1
+
+#configure channel
+twit.channels.ch-1.type = file
+twit.channels.ch-1.checkpointDir = /home/cloudera/filechannel/twit/chkpoint_dir
+twit.channels.ch-1.dataDirs = /home/cloudera/filechannel/twit/data_dir
+
+
+#configure source
+twit.sources.src-1.channels = ch-1
+twit.sources.src-1.type = com.cloudera.flume.source.TwitterSource
+twit.sources.src-1.consumerKey = gikOpbCMSZoF5vBJxq4bZGvqu
+twit.sources.src-1.consumerSecret = NO0lX9jeEfunr6E8MphHHIAJ5gOt6geHYa1JWOsnToU2hoBJEy
+twit.sources.src-1.accessToken = 753034693407285249-En4xG35p8Q78L5hEkUfyXSq6zUQQBTe
+twit.sources.src-1.accessTokenSecret = znJgh79ZPxSJ5uiQ60XA3o4aiSVyFwoUDVBeWyGOj5ood
+twit.sources.src-1.keywords =trump
+
+#configure sink
+twit.sinks.snk-1.channel = ch-1
+twit.sinks.snk-1.type = hdfs
+twit.sinks.snk-1.hdfs.path = /user/cloudera/hadoop-training/flume/twit-agent/%Y/%m/%d/%H
+twit.sinks.snk-1.hdfs.rollInterval = 300
+twit.sinks.snk-1.hdfs.rollSize = 0
+twit.sinks.snk-1.hdfs.rollCount = 0
+twit.sinks.snk-1.hdfs.fileType = DataStream
+twit.sinks.snk-1.hdfs.writeFormat = Text
+twit.sinks.snk-1.hdfs.filePrefix = news-twits
+twit.sinks.snk-1.hdfs.fileSuffix = .txt
+
+##############
+
+Twitter Flume:
+
+# 
+
+# nohup flume-ng agent --name twit --conf-file /home/cloudera/flume/twitterstream.properties --classpath /home/cloudera/hadoop-training-projects/flume/twitter-stream/flume-sources-1.0-SNAPSHOT.jar &
+
+# tail -f nohup.out
