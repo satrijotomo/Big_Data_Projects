@@ -2,9 +2,14 @@
 
 1. Create new Twitter App and generate the API keys - https://apps.twitter.com/
 2. Download flume-sources JAR - http://files.cloudera.com/samples/flume-sources-1.0-SNAPSHOT.jar
-3. Place the JAR file in the client FS, in this example it is stored at directory: 
+3. Place the flume-sources-1.0-SNAPSHOT.jar file in the client FS, in this example it is stored at directory: 
     /home/cloudera/hadoop-training-projects/flume/twitter-stream/
-4. Create property file with the file content below. 
+4. Create property file with the file content below. This example assumes the file is saved as:
+    /home/cloudera/flume/twitterstream.propertie
+5. Run the flume agent:
+    flume-ng agent --name twit --conf-file /home/cloudera/flume/twitterstream.properties --classpath /home/cloudera/hadoop-training-projects/flume/twitter-stream/flume-sources-1.0-SNAPSHOT.jar
+6. Check the result file in hdfs:
+    hdfs dfs -ls /user/cloudera/hadoop-training/flume/twit-agent/
 
 
 ######twitterstream########
@@ -42,10 +47,3 @@ twit.sinks.snk-1.hdfs.fileSuffix = .txt
 
 ##############
 
-Twitter Flume:
-
-# 
-
-# nohup flume-ng agent --name twit --conf-file /home/cloudera/flume/twitterstream.properties --classpath /home/cloudera/hadoop-training-projects/flume/twitter-stream/flume-sources-1.0-SNAPSHOT.jar &
-
-# tail -f nohup.out
