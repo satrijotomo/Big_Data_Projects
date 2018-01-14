@@ -35,10 +35,25 @@ avgdata = FOREACH closegrp GENERATE group AS stock_symbol, AVG(closeproj.stock_p
 -- sort avgdata in descending order of avg_price
 sorted_data = ORDER avgdata BY avg_price DESC;
 
--- preview your result
+-- preview your result in console
 DUMP sorted_data;
 
--- store in persistent files
+-- store in persistent files in HDFS
 STORE sorted_data INTO '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility' USING PigStorage('|');
 STORE sorted_data INTO '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility_json' USING JsonStorage();
 STORE sorted_data INTO '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility_avro' USING AvroStorage();
+
+
+
+Sample result:
+$ hdfs dfs -cat /user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility_json/part-r-00000
+{"stock_symbol":"DASTY","avg_price":47.82756784799937}
+{"stock_symbol":"DNEX","avg_price":43.41555555902346}
+{"stock_symbol":"DISH","avg_price":34.58436091860434}
+{"stock_symbol":"DLTR","avg_price":34.107343673706055}
+{"stock_symbol":"DJCO","avg_price":33.91157895281799}
+{"stock_symbol":"DELL","avg_price":32.81520229397398}
+{"stock_symbol":"DECK","avg_price":29.767999908924104}
+{"stock_symbol":"DWA","avg_price":28.65660375918982}
+...
+...
