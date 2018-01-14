@@ -1,3 +1,10 @@
+PIG Latin
+
+
+Task:
+Find the average closing price for each stock in the entire NASDAQ dataset.
+
+Preparation:
 # Load csv data to HDFS. 
 $ hdfs dfs -mkdir -p /user/bambangsatrijoto/rawdata/handson_train/nyse
 $ hdfs dfs -mkdir -p /user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices
@@ -6,3 +13,32 @@ $ hdfs dfs -copyFromLocal NASDAQ_dividends_C.csv /user/bambangsatrijoto/rawdata/
 $ hdfs dfs -copyFromLocal NASDAQ_daily_prices_subset.csv /user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices
 
 
+Execution:
+Note: the steps below can be executed as a script or through step-by-step verification from grunt shell
+
+-- load dataset
+data = LOAD '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/NASDAQ_daily_prices_subset.csv' USING PigStorage(',') AS (exchange:chararray,stock_symbol:chararray,date:chararray,stock_price_open:float,stock_price_high:float,stock_price_low:float,stock_price_close:float,stock_volume:int,stock_price_adj_close:float);
+
+-- remove header 
+clean_data = FILTER data BY date != 'date';
+
+-- from clean_data get stock symbol, stock_price_close
+closeproj = FOREACH clean_data GENERATE stock_symbol, stock_price_close;
+
+-- group closeproj by stock symbol
+
+closegrp = GROUP closeproj BY stock_symbol;
+
+--for each group average the closing stock price
+avgdata = FOREACH closegrp GENERATE group AS stock_symbol, AVG(closeproj.stock_price_close) AS avg_price;
+
+-- sort avgdata in descending order of avg_price
+sorted_data = ORDER avgdata BY avg_price DESC;
+
+-- preview your result
+DUMP sorted_data;
+
+-- store in persistent files
+STORE sorted_data INTO '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility' USING PigStorage('|');
+STORE sorted_data INTO '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility_json' USING JsonStorage();
+STORE sorted_data INTO '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/rec_max_volatility_avro' USING AvroStorage();
