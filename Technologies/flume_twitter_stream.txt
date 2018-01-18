@@ -7,7 +7,8 @@
 4. Create property file with the file content below. This example assumes the file is saved as:
     /home/cloudera/flume/twitterstream.propertie
 5. Run the flume agent:
-    flume-ng agent --name twit --conf-file /home/cloudera/flume/twitterstream.properties --classpath /home/cloudera/hadoop-training-projects/flume/twitter-stream/flume-sources-1.0-SNAPSHOT.jar
+    flume-ng agent --name twit --conf-file /home/cloudera/flume/twitterstream.properties --classpath \
+    /home/cloudera/hadoop-training-projects/flume/twitter-stream/flume-sources-1.0-SNAPSHOT.jar
 6. Check the result file in hdfs:
     hdfs dfs -ls /user/cloudera/hadoop-training/flume/twit-agent/
 
