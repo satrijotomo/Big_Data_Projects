@@ -25,7 +25,7 @@ twit.channels.ch-1.checkpointDir = /home/cloudera/filechannel/twit/chkpoint_dir
 twit.channels.ch-1.dataDirs = /home/cloudera/filechannel/twit/data_dir
 
 
-#configure source
+#configure source, fill in the key and token fields with code generated in step#1 above
 twit.sources.src-1.channels = ch-1
 twit.sources.src-1.type = com.cloudera.flume.source.TwitterSource
 twit.sources.src-1.consumerKey = <xxx>
