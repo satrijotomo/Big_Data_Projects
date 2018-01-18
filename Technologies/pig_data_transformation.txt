@@ -17,7 +17,8 @@ Execution:
 Note: the steps below can be executed as a script or through step-by-step verification from grunt shell
 
 -- load dataset
-data = LOAD '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/NASDAQ_daily_prices_subset.csv' USING PigStorage(',') AS (exchange:chararray,stock_symbol:chararray,date:chararray,stock_price_open:float,stock_price_high:float,stock_price_low:float,stock_price_close:float,stock_volume:int,stock_price_adj_close:float);
+data = LOAD '/user/bambangsatrijoto/rawdata/handson_train/nasdaq_daily_prices/NASDAQ_daily_prices_subset.csv' 
+USING PigStorage(',') AS (exchange:chararray,stock_symbol:chararray,date:chararray,stock_price_open:float,stock_price_high:float,stock_price_low:float,stock_price_close:float,stock_volume:int,stock_price_adj_close:float);
 
 -- remove header 
 clean_data = FILTER data BY date != 'date';
