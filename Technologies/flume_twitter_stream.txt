@@ -32,7 +32,7 @@ twit.sources.src-1.consumerKey = gikOpbCMSZoF5vBJxq4bZGvqu
 twit.sources.src-1.consumerSecret = NO0lX9jeEfunr6E8MphHHIAJ5gOt6geHYa1JWOsnToU2hoBJEy
 twit.sources.src-1.accessToken = 753034693407285249-En4xG35p8Q78L5hEkUfyXSq6zUQQBTe
 twit.sources.src-1.accessTokenSecret = znJgh79ZPxSJ5uiQ60XA3o4aiSVyFwoUDVBeWyGOj5ood
-twit.sources.src-1.keywords =trump
+twit.sources.src-1.keywords = Trump
 
 #configure sink
 twit.sinks.snk-1.channel = ch-1
