@@ -1,0 +1,119 @@
+Question:
+============
+Use Pig to find all genres and the number of movies for each genre from full movielens dataset (ml-latest.zip, size: 224 MB)
+
+
+Preparation:
+============
+1. Download and unzip the movielens dataset
+
+$ wget http://files.grouplens.org/datasets/movielens/ml-latest.zip
+
+$ unzip ml-latest.zip
+
+2. Create HDFS directory 
+hdfs dfs -mkdir -p /user/cloudera/rawdata/handson_train/movielens/latest/movies
+hdfs dfs -mkdir -p /user/cloudera/rawdata/handson_train/movielens/latest/ratings
+
+
+3. Move the dataset to HDFS
+hdfs dfs -moveFromLocal ml-latest/movies.csv /user/cloudera/rawdata/handson_train/movielens/latest/movies
+hdfs dfs -moveFromLocal ml-latest/ratings.csv /user/cloudera/rawdata/handson_train/movielens/latest/ratings
+
+
+Dependency:
+============
+Here we use piggybank UDF CSVLoader instead of PigStorage since the PigStorage cannot load double-quoted fields that
+contain commas properly. 
+
+For example, using PigStorage(',') on record: 
+"American President, The (1995)",Comedy|Drama|Romance 
+
+will result in:
+"American President,      The (1995)",     Comedy|Drama|Romance 
+
+While CSVLoader result will be:
+"American President, The (1995)",          Comedy|Drama|Romance
+
+
+JAR used is piggybank-0.16.0.jar that can be downloaded from http://central.maven.org/maven2/org/apache/pig/piggybank/0.16.0/. 
+In this example, the downloaded jar file is stored under /home/cloudera/hadoop-training-projects/pig/movielens/
+
+Further reading: https://pig.apache.org/docs/r0.8.1/api/org/apache/pig/piggybank/storage/CSVLoader.html
+
+
+Execution:
+============
+
+-- register '/home/cloudera/hadoop-training-projects/pig/movielens/*.jar';
+
+-- DEFINE csvLoader org.apache.pig.piggybank.storage.CSVLoader();
+
+-- all_data = load '/user/bambangsatrijoto/rawdata/handson_train/movielens/latest/movies/' using csvLoader() as (movieId: chararray, title: chararray, genres : chararray);
+
+-- data = FILTER all_data BY genres != 'genres';
+
+-- genre_data = FOREACH data GENERATE FLATTEN(TOKENIZE(genres, '|')) AS genre;
+## Without FLATTEN, the result will be in array  {(Drama), ..., (Sci-Fi)}    
+
+-- genre_grouping = GROUP genre_data BY genre;
+
+-- hist = FOREACH genre_grouping GENERATE group as genre, COUNT(genre_data.genre) AS totcount;
+
+-- ordered_hist = ORDER hist by totcount desc;
+
+
+-- DUMP hist;
+
+(War,1544)
+(IMAX,197)
+(Crime,4247)
+(Drama,19806)
+(Action,5775)
+(Comedy,13002)
+(Horror,4448)
+(Sci-Fi,2847)
+(Fantasy,2212)
+(Musical,1079)
+(Mystery,2274)
+(Romance,6069)
+(Western,1028)
+(Children,2182)
+(Thriller,6761)
+(Adventure,3369)
+(Animation,1942)
+(Film-Noir,360)
+(Documentary,4122)
+((no genres listed),2756)
+
+
+
+-- DUMP ordered_hist;
+
+(Drama,19806)
+(Comedy,13002)
+(Thriller,6761)
+(Romance,6069)
+(Action,5775)
+(Horror,4448)
+(Crime,4247)
+(Documentary,4122)
+(Adventure,3369)
+(Sci-Fi,2847)
+((no genres listed),2756)
+(Mystery,2274)
+(Fantasy,2212)
+(Children,2182)
+(Animation,1942)
+(War,1544)
+(Musical,1079)
+(Western,1028)
+(Film-Noir,360)
+(IMAX,197)
+
+
+-- STORE ordered_hist into '/user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_txt' USING PigStorage('\t');
+-- STORE ordered_hist into '/user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_json' USING JsonStorage();
+
+
+
