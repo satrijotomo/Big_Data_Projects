@@ -117,4 +117,30 @@ Note: the steps below can be executed as a script or through step-by-step verifi
 -- STORE ordered_hist into '/user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_json' USING JsonStorage();
 
 
+RESULT:
+========
+$ hdfs dfs -cat /user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_txt/part*
+Drama	19806
+Comedy	13002
+Thriller	6761
+Romance	6069
+Action	5775
+Horror	4448
+Crime	4247
+Documentary	4122
+...
+...
+
+
+$ hdfs dfs -cat /user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_json/part*
+{"genre":"Drama","totcount":19806}
+{"genre":"Comedy","totcount":13002}
+{"genre":"Thriller","totcount":6761}
+{"genre":"Romance","totcount":6069}
+{"genre":"Action","totcount":5775}
+{"genre":"Horror","totcount":4448}
+{"genre":"Crime","totcount":4247}
+...
+...
+
 
