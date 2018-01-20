@@ -44,6 +44,7 @@ Further reading: https://pig.apache.org/docs/r0.8.1/api/org/apache/pig/piggybank
 
 Execution:
 ============
+Note: the steps below can be executed as a script or through step-by-step verification from grunt shell
 
 -- register '/home/cloudera/hadoop-training-projects/pig/movielens/*.jar';
 
@@ -54,7 +55,7 @@ Execution:
 -- data = FILTER all_data BY genres != 'genres';
 
 -- genre_data = FOREACH data GENERATE FLATTEN(TOKENIZE(genres, '|')) AS genre;
-## Without FLATTEN, the result will be in array  {(Drama), ..., (Sci-Fi)}    
+## Without FLATTEN, the result will be in nested array:  {(Drama), ..., (Sci-Fi)}    
 
 -- genre_grouping = GROUP genre_data BY genre;
 
