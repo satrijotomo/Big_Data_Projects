@@ -1,16 +1,13 @@
-
-Question: 
+Question:
 Generate summary rating for the movies in the dataset in the form:
 movieId, title, total_no_rating, total ratings, avg_rating, variance_rating
 
-Problem: rating csv doesn't have title, so JOIN is needed with the movies csv
-
+Note: rating csv file doesn't have "title", so JOIN  is needed with the movies csv
 
 Preparation:
 1. Download and unzip the movielens dataset
 
 $ wget http://files.grouplens.org/datasets/movielens/ml-latest.zip
-
 $ unzip ml-latest.zip
 
 2. Create HDFS directory 
@@ -59,8 +56,6 @@ final_data = FOREACH movies_join_ratings GENERATE movies::movieId, movies::title
 
 -- store result
 STORE final_data INTO '/user/cloudera/output/handson_train/movielens/movies_rating_analysis';
-
-
 ===================================
 
 4.2 Check syntax
