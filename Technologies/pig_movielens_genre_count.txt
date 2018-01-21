@@ -50,12 +50,11 @@ Note: the steps below can be executed as a script or through step-by-step verifi
 
 -- DEFINE csvLoader org.apache.pig.piggybank.storage.CSVLoader();
 
--- all_data = load '/user/bambangsatrijoto/rawdata/handson_train/movielens/latest/movies/' using csvLoader() as (movieId: chararray, title: chararray, genres : chararray);
+-- all_data = load '/user/cloudera/rawdata/handson_train/movielens/latest/movies/' using csvLoader() as (movieId: chararray, title: chararray, genres : chararray);
 
 -- data = FILTER all_data BY genres != 'genres';
 
--- genre_data = FOREACH data GENERATE FLATTEN(TOKENIZE(genres, '|')) AS genre;
-## Without FLATTEN, the result will be in nested array:  {(Drama), ..., (Sci-Fi)}    
+-- genre_data = FOREACH data GENERATE FLATTEN(TOKENIZE(genres, '|')) AS genre;   
 
 -- genre_grouping = GROUP genre_data BY genre;
 
@@ -84,13 +83,13 @@ Note: the steps below can be executed as a script or through step-by-step verifi
 ....
 
 
--- STORE ordered_hist into '/user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_txt' USING PigStorage('\t');
--- STORE ordered_hist into '/user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_json' USING JsonStorage();
+-- STORE ordered_hist into '/user/cloudera/output/handson_train/movielens/genre_histogram_txt' USING PigStorage('\t');
+-- STORE ordered_hist into '/user/cloudera/output/handson_train/movielens/genre_histogram_json' USING JsonStorage();
 
 
 RESULT:
 ========
-$ hdfs dfs -cat /user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_txt/part*
+$ hdfs dfs -cat /user/cloudera/output/handson_train/movielens/genre_histogram_txt/part*
 Drama	19806
 Comedy	13002
 Thriller	6761
@@ -103,7 +102,7 @@ Documentary	4122
 ...
 
 
-$ hdfs dfs -cat /user/bambangsatrijoto/output/handson_train/movielens/genre_histogram_json/part*
+$ hdfs dfs -cat /user/cloudera/output/handson_train/movielens/genre_histogram_json/part*
 {"genre":"Drama","totcount":19806}
 {"genre":"Comedy","totcount":13002}
 {"genre":"Thriller","totcount":6761}
