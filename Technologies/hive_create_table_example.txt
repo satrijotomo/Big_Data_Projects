@@ -1,0 +1,55 @@
+
+Hive Example to Create External Table with NASDAQ Price Data
+==============================================================
+
+1. Create HDFS directory 
+hdfs dfs -mkdir -p /user/cloudera/rawdata/handson_train/nasdaq/
+
+2. Copy the dataset to HDFS
+hdfs dfs -copyFromLocal  NASDAQ_daily_prices_subset.csv /user/cloudera/rawdata/handson_train/nasdaq/
+
+3. Create database/schema from beeline
+
+0: jdbc:hive2://quickstart.cloudera:10000/> create database nasdaq_db;
+...
+INFO  : OK
+No rows affected (0.341 seconds)
+
+0: jdbc:hive2://quickstart.cloudera:10000/> show database;
+...
+INFO  : OK
++----------------+--+
+| database_name  |
++----------------+--+
+| default        |
+| nasdaq_db      |
++----------------+--+
+
+
+In the cloud:
+
+0: jdbc:hive2://quickstart.cloudera:10000/> create database nasdaq_db location <your home directory>;
+
+4. Use database
+
+0: jdbc:hive2://quickstart.cloudera:10000/> use nasdaq_db;
+
+5.  Create table:
+0: jdbc:hive2://quickstart.cloudera:10000/> create external table daily_prices (
+exchange_name string,
+stock_symbol string,
+tdate string,
+stock_price_open float,
+stock_price_high float,
+stock_price_low float,
+stock_price_close float,
+stock_volume int,
+stock_price_adj_close float
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+location '/user/cloudera/rawdata/handson_train/nasdaq/';
+
+6. Test:
+0: jdbc:hive2://quickstart.cloudera:10000/> select * from daily_prices limit 10;
