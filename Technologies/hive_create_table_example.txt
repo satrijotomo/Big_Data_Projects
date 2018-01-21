@@ -15,7 +15,7 @@ hdfs dfs -copyFromLocal  NASDAQ_daily_prices_subset.csv /user/cloudera/rawdata/h
 INFO  : OK
 No rows affected (0.341 seconds)
 
-0: jdbc:hive2://quickstart.cloudera:10000/> show database;
+0: jdbc:hive2://quickstart.cloudera:10000/> show databases;
 ...
 INFO  : OK
 +----------------+--+
@@ -52,4 +52,14 @@ STORED AS TEXTFILE
 location '/user/cloudera/rawdata/handson_train/nasdaq/';
 
 6. Test:
+0: jdbc:hive2://quickstart.cloudera:10000/> show tables;
+...
++---------------+--+
+|   tab_name    |
++---------------+--+
+| daily_prices  |
++---------------+--+
+
 0: jdbc:hive2://quickstart.cloudera:10000/> select * from daily_prices limit 10;
+
+
