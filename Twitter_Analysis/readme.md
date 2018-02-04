@@ -10,3 +10,6 @@ Prerequisites:
 - Cloudera environment. Cloudera quickstart VM is used in this exercise
 - All required services are up and running
 - Twitter access keys are available 
+
+Running:
+1. Flume: flume-ng agent --name twit --conf-file /home/cloudera/twitter_analysis/flume_tweets_agent.properties --classpath /home/cloudera/twitter_analysis/jar/flume-sources-1.0-SNAPSHOT.jar
