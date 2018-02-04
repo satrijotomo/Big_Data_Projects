@@ -12,7 +12,6 @@ Prerequisites:
 - Twitter access keys are available 
 
 Running:
-1. Flume: 
-$ flume-ng agent --name twit --conf-file /home/cloudera/twitter_analysis/flume_tweets_agent.properties --classpath /home/cloudera/twitter_analysis/jar/flume-sources-1.0-SNAPSHOT.jar
+1. Flume: # flume-ng agent --name twit --conf-file /home/cloudera/twitter_analysis/flume_tweets_agent.properties --classpath /home/cloudera/twitter_analysis/jar/flume-sources-1.0-SNAPSHOT.jar
 
 
