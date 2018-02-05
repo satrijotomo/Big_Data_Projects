@@ -1,11 +1,11 @@
-REGISTER '/home/cloudera/pig/jars/json-simple-1.1.1.jar'
-REGISTER '/home/cloudera/pig/jars/elephant-bird-pig-4.14.jar'
-REGISTER '/home/cloudera/pig/jars/elephant-bird-hadoop-compat-4.14.jar'
-REGISTER '/home/cloudera/pig/jars/avro-1.8.0.jar' 
-REGISTER '/home/cloudera/pig/jars/piggybank-0.15.0.jar'
-REGISTER '/home/cloudera/pig/jars/jackson-core-asl-1.9.13.redhat-3.jar'
-REGISTER '/home/cloudera/pig/jars/jackson-mapper-asl-1.9.13.redhat-3.jar'
-REGISTER '/home/cloudera/pig/jars/custom-pig-udf-0.0.1-SNAPSHOT.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/json-simple-1.1.1.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/elephant-bird-pig-4.14.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/elephant-bird-hadoop-compat-4.14.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/avro-1.8.0.jar' 
+REGISTER '/home/cloudera/twitter_analysis/jar/piggybank-0.15.0.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/jackson-core-asl-1.9.13.redhat-3.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/jackson-mapper-asl-1.9.13.redhat-3.jar'
+REGISTER '/home/cloudera/twitter_analysis/jar/custom-pig-udf-0.0.1-SNAPSHOT.jar'
 
 DEFINE extractHref com.dezyre.hadooptraining.udf.HrefExtractor();
 DEFINE getHashTagText com.dezyre.hadooptraining.udf.HashTextExtractor();
