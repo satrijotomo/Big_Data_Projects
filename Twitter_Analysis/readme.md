@@ -15,7 +15,7 @@ Running:
 1. Flume: # flume-ng agent --name twit --conf-file /home/cloudera/twitter_analysis/flume_tweets_agent.properties --classpath /home/cloudera/twitter_analysis/jar/flume-sources-1.0-SNAPSHOT.jar
 Use nohup for running on the background
 
-2. Pig: # pig -p year=2087 -p month=02 -p day=04 -p hour=15 -f /home/cloudera/twitter_analysis/pig_twitter_processing.pig
+2. Pig: # pig -p year=2018 -p month=02 -p day=04 -p hour=15 -f /home/cloudera/twitter_analysis/pig_twitter_processing.pig
 
 
 
