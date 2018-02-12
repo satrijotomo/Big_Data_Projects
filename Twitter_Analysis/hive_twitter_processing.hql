@@ -28,8 +28,8 @@ partitioned by (
   hour string
 )
 stored as avro
-location '/user/cloudera/output/handson_train/javaJobTweet'
-tblproperties('avro.schema.url'='/user/cloudera/output/handson_train/hive/twitter_avro_schema/twitter_avro_schema.avsc');
+location '/user/cloudera/pig/output/bigdata'
+tblproperties('avro.schema.url'='/home/cloudera/twitter_analysis/twitter_avro_schema.avsc');
 
 -- sample query to load all job postings in english
 --select * from tweets where twtlang = 'en';
