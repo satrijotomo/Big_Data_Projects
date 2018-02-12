@@ -29,7 +29,7 @@ partitioned by (
 )
 stored as avro
 location '/user/cloudera/pig/output/bigdata'
-tblproperties('avro.schema.url'='/home/cloudera/twitter_analysis/twitter_avro_schema.avsc');
+tblproperties('avro.schema.url'='/user/cloudera/pig/output/bigdata/twitter_avro_schema.avsc');
 
 -- sample query to load all job postings in english
 --select * from tweets where twtlang = 'en';
