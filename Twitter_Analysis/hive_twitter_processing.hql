@@ -28,7 +28,7 @@ partitioned by (
   hour string
 )
 stored as avro
-location '/user/cloudera/pig/output/bigdata'
+location '/user/cloudera/pig/output/bigdata/2018/02/04/17'
 tblproperties('avro.schema.url'='/user/cloudera/pig/output/bigdata/twitter_avro_schema.avsc');
 
 -- sample query to load all job postings in english
