@@ -19,6 +19,10 @@ Flume script can also be run on the background with "nohup" command
 
 2. Pig: # pig -p year=2018 -p month=02 -p day=04 -p hour=15 -f /home/cloudera/twitter_analysis/pig_twitter_processing.pig
 
+3. Upload file twitter_avro_schema.avsc to HDFS and update avro.schema.url property value in hive_twitter_processing.hql accordingly. Also update avro location as necessary (refer to output of Pig in step#2).
+
+
+
 
 
 
