@@ -1,7 +1,7 @@
 create database if not exists twitterdb ;
 
 alter database twitterdb 
-set dbproperties('table.creator'='Michael Enudi');
+set dbproperties('table.creator'='Cloudera User');
 
 use twitterdb;
 
