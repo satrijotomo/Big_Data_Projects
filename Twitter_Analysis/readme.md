@@ -21,10 +21,9 @@ Flume script can also be run on the background with "nohup" command
 
 3. Upload file twitter_avro_schema.avsc to HDFS and update avro.schema.url property value in hive_twitter_processing.hql accordingly. Also update avro location as necessary (refer to output of Pig in step#2).
 
-4. Run Hive script:
-[cloudera@quickstart twitter_analysis]$ hive -f hive_twitter_processing.hql
+4. Run Hive script: # hive -f hive_twitter_processing.hql
 
-5. 
+5. Run sqoop command insied file sqoop_twitter.txt
 
 
 
