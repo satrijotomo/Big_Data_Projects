@@ -14,7 +14,6 @@ Prerequisites:
 Running:
 1. Flume: # flume-ng agent --name twit --conf-file /home/cloudera/twitter_analysis/flume_tweets_agent.properties --classpath /home/cloudera/twitter_analysis/jar/flume-sources-1.0-SNAPSHOT.jar
 Use nohup for running on the background
-
 Flume script can also be run on the background with "nohup" command
 
 2. Pig: # pig -p year=2018 -p month=02 -p day=04 -p hour=15 -f /home/cloudera/twitter_analysis/pig_twitter_processing.pig
@@ -23,7 +22,7 @@ Flume script can also be run on the background with "nohup" command
 
 4. Run Hive script: # hive -f hive_twitter_processing.hql
 
-5. Run sqoop command insied file sqoop_twitter.txt
+5. Run sqoop command inside file sqoop_twitter.txt
 
 
 
