@@ -72,7 +72,7 @@
     },
     "clusterWorkerNodeCount": {
       "type": "int",
-      "defaultValue": 4,
+      "defaultValue": 1,
       "metadata": {
         "description": "The number of nodes in the HDInsight cluster."
       }
@@ -171,7 +171,7 @@
               "name": "headnode",
               "targetInstanceCount": "2",
               "hardwareProfile": {
-                "vmSize": "Large"
+                "vmSize": "Small"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
@@ -195,7 +195,7 @@
               "name": "workernode",
               "targetInstanceCount": "[parameters('clusterWorkerNodeCount')]",
               "hardwareProfile": {
-                "vmSize": "Large"
+                "vmSize": "Small"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
